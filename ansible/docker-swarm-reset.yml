@@ -16,15 +16,3 @@
   tasks:
   - command: reboot
     ignore_errors: True
-
-- hosts: localhost
-  become: yes
-  gather_facts: no
-  tasks:
-  - command: sleep 100
-
-- hosts: swarm-nodes
-  become: yes
-  gather_facts: no
-  tasks:
-  - command: hostname
