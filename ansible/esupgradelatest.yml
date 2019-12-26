@@ -19,7 +19,7 @@
           bootstrap.memory_lock: true,
         },
         es_heap_size: "2g",
-        es_version: "6.8.6"
+        es_version: "6.8.6",
         es_etc_discovery_zen_ping_unicast_hosts: "{{ groups['log-es-2'] }}",
         es_etc_cluster_name: "{{ node_name }}"
       }
