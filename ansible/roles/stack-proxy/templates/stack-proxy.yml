@@ -5,16 +5,10 @@ services:
     image: "{{hub_org}}/{{image_name}}:{{image_tag}}"
     # This is a workaround for remote ip address is not visible nginx
     ports:
-      - mode: host
-        target: 80
-        published: 31380
-        protocol: TCP
-      - mode: host
-        target: 443
-        published: 31390
-        protocol: TCP
+      - "31390:443"
+      - "31380:80"
     deploy:
-      mode: global
+      replicas: {{ proxy_replicas }}
       resources:
         reservations:
           memory: "{{ proxy_reservation_memory }}"
@@ -23,6 +17,7 @@ services:
       update_config:
         parallelism: 1
         delay: 30s
+    secrets:
     secrets:
 {# Skip copying ssls for no domain configs #}
 {% if proto=='https' %}
