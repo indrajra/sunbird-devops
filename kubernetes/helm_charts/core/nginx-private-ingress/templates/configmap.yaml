@@ -5,6 +5,8 @@ data:
       listen 80;
       listen [::]:80;
 
+      resolver {{ kube_dns_ip }};
+
       location /learner/ {
         rewrite ^/learner/(.*) /$1 break;
         proxy_pass http://learner-service:9000;
@@ -49,4 +51,4 @@ data:
 kind: ConfigMap
 metadata:
   name: nginx-private-ingress.conf
-  ;namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.namespace }}
